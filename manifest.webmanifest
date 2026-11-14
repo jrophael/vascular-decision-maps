@@ -1,6 +1,6 @@
 {
-  "name": "Vascular decision maps",
-  "short_name": "Vasc maps",
+  "name": "Vascular Algorithms",
+  "short_name": "Vasc Algos",
   "description": "How an experienced vascular surgeon reasons through 46 common decisions. For learning and teaching; not for clinical use.",
   "start_url": "./",
   "scope": "./",

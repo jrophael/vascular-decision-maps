@@ -1,4 +1,4 @@
-# Vascular decision maps
+# Vascular Algorithms
 
 How an experienced vascular surgeon reasons through 46 common decisions, one question at a time. For learning and teaching; not for clinical use.
 

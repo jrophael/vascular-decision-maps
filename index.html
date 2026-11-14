@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vascular Decision Maps</title>
+<title>Vascular Algorithms</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="How an experienced vascular surgeon reasons through 46 common decisions. For learning and teaching; not for clinical use.">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Vasc maps">
+<meta name="apple-mobile-web-app-title" content="Vasc Algos">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="icons/favicon-32.png">
@@ -106,9 +106,9 @@ details.why{margin-top:6px;font-size:15px}
 </head>
 <body>
 <header class="top"><div class="in">
-<div class="thumb" aria-hidden="true"></div><a class="brand" href="#">Vascular decision maps</a>
+<div class="thumb" aria-hidden="true"></div><a class="brand" href="#">Vascular Algorithms</a>
 <div class="tag">How an experienced vascular surgeon reasons through 46 common decisions, one question at a time.</div><p class="status">Pilot for learning and teaching. These show reasoning, not protocols, and are not for clinical use.</p>
-<input class="search" id="q" type="search" placeholder="Search, for example carotid, ulcer or endoleak" aria-label="Search maps" autocomplete="off">
+<input class="search" id="q" type="search" placeholder="Search, for example carotid, ulcer or endoleak" aria-label="Search algorithms" autocomplete="off">
 </div></header>
 <main id="app"></main>
 <script>
@@ -131,9 +131,9 @@ function home(){
   const term=qi.value.trim().toLowerCase();
   let list=M.filter(m=>(filt==='All'||m.g===filt)&&(!term||term.split(/\s+/).every(w=>m._f.includes(w))));
   let h='';
-  if(!term&&filt==='All')h+='<p class="intro">Choose a map. Step through asks one question at a time and ends at an action. Full map shows every step with its reasoning and references.</p>';
+  if(!term&&filt==='All')h+='<p class="intro">Choose an algorithm. Step through asks one question at a time and ends at an action. Full algorithm shows every step with its reasoning and references.</p>';
   h+='<div class="chips">'+['All',...groups].map(g=>`<button class="chip${g===filt?' on':''}" data-g="${esc(g)}">${esc(g==='Trauma, iatrogenic injury and amputation'?'Trauma and amputation':g)}</button>`).join('')+'</div>';
-  if(!list.length)h+='<p class="empty">No maps match “'+esc(term)+'”.</p>';
+  if(!list.length)h+='<p class="empty">No algorithms match “'+esc(term)+'”.</p>';
   groups.forEach(g=>{const L=list.filter(m=>m.g===g);if(!L.length)return;
     h+=`<section class="secblock" style="--c:${L[0].col}"><h2 class="sec">${esc(g)}</h2><ul class="list">`+L.map(m=>`<li><button class="mc" data-s="${m.s}"><b>${esc(m.t)}</b><small>${esc(m.sub.length>120?m.sub.slice(0,117).replace(/\s\S*$/,'')+'…':m.sub)}</small></button></li>`).join('')+'</ul></section>';});
   app.innerHTML=h+FOOT;
@@ -155,8 +155,8 @@ function stepHTML(s){
 let cur=null,mode='step',pos=0,hist=[],trail=[],outcome=null;
 function mapView(m){
   setColour(m);
-  let h=`<button class="back" id="bk">All maps</button><div class="kick">${esc(m.g)}</div><h1>${esc(m.t)}</h1><p class="lede">${esc(m.sub)}</p>`;
-  h+=`<div class="tabs"><button data-m="step"${mode==='step'?' class="on"':''}>Step through</button><button data-m="full"${mode==='full'?' class="on"':''}>Full map</button></div><div id="body"></div>`;
+  let h=`<button class="back" id="bk">All algorithms</button><div class="kick">${esc(m.g)}</div><h1>${esc(m.t)}</h1><p class="lede">${esc(m.sub)}</p>`;
+  h+=`<div class="tabs"><button data-m="step"${mode==='step'?' class="on"':''}>Step through</button><button data-m="full"${mode==='full'?' class="on"':''}>Full algorithm</button></div><div id="body"></div>`;
   if(m.ks)h+=`<div class="ks"><b>Key sources.</b> ${esc(m.ks)}`+(m.refs.length?`<details class="ev"><summary>All references (${m.refs.length})</summary>${rl(m,m.refs.map((_,i)=>i+1))}</details>`:'')+'</div>';
   h+=FOOT;
   app.innerHTML=h;
@@ -179,8 +179,8 @@ function render(){
     h+=`<div class="out c-${o.c}"><span class="ol">${esc(o.l)}</span>${sev(o.c)}<h3>${esc(o.h)}</h3>${o.sub?`<p style="margin:0 0 4px;font-size:13px;opacity:.8">${esc(o.sub)}</p>`:''}<div>${esc(o.t)}</div>${ev(cur,o.r,'Evidence for this branch')}</div>`;
     h+=`<div class="navrow">${pos<total-1?'<button class="btn" id="nx">Next question</button>':''}<button class="btn ghost" id="bb">Back</button><button class="btn ghost" id="rs">Start again</button></div>`;
   } else if(pos>=total){
-    h+=`<div class="qcard"><div class="qcount">End of the map</div><div class="qq">You have reached the end of this pathway.</div><p class="ctx">Real patients often fall between the branches. Use the full map to see the reasoning and evidence at each step.</p></div>`;
-    h+=`<div class="navrow"><button class="btn" id="rs">Start again</button><button class="btn ghost" id="bb">Back</button><button class="btn ghost" id="fm">Open full map</button></div>`;
+    h+=`<div class="qcard"><div class="qcount">End of the algorithm</div><div class="qq">You have reached the end of this pathway.</div><p class="ctx">Real patients often fall between the branches. Use the full map to see the reasoning and evidence at each step.</p></div>`;
+    h+=`<div class="navrow"><button class="btn" id="rs">Start again</button><button class="btn ghost" id="bb">Back</button><button class="btn ghost" id="fm">Open full algorithm</button></div>`;
   } else {
     const s=S[pos];
     h+=`<div class="qcard"><div class="qcount">Step ${pos+1} of ${total}</div>`;
